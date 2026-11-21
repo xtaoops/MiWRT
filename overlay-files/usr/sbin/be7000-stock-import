@@ -231,8 +231,6 @@ apply_net() {
 		;;
 	dhcp) uci set network.wan.proto=dhcp ;;
 	esac
-	[ -n "$lan_ipaddr" ] && uci set network.lan.ipaddr="$lan_ipaddr"
-	[ -n "$lan_netmask" ] && uci set network.lan.netmask="$lan_netmask"
 	uci commit network
 }
 

@@ -57,16 +57,16 @@ Step 5. First login
 The first boot takes about a minute. When the LED is solid white, the router is ready. The root password is empty for now.
 
 Where to find the router after the install
-
+On the first boot the firmware takes the Wi-Fi names and passwords and the internet connection from the factory firmware. The router keeps this build's default LAN address, 10.10.10.1.
 On the first boot the firmware takes the Wi-Fi names and passwords, the internet connection and the router address from the factory firmware.
 
-If the factory firmware was set up, the router stays at its address, usually 192.168.31.1. Wi-Fi keeps the same names and passwords and the internet works by itself. Nothing needs to change on the computer.
+If the factory firmware was set up, Wi-Fi keeps the same names and passwords and the internet works by itself. The router is at 10.10.10.1; the computer gets a new address automatically.
 
-If the factory firmware was not set up or the import failed, the router is at 192.168.1.1. The Wi-Fi network is OpenWrt-BE7000. Its password is the router's serial number from the label on the bottom (SN), typed without the slash. Change it after the first login. Only if the router could not read its own serial number is the password be7000openwrt.
+If the factory firmware was not set up or the import failed, the router is still at 10.10.10.1. The Wi-Fi network is OpenWrt-BE7000. Its password is the router's serial number from the label on the bottom (SN), typed without the slash. Change it after the first login. Only if the router could not read its serial number is the password be7000openwrt.
 
 Status, Overview shows what was taken, with an undo button. The admin password of the factory firmware is not taken.
 
-If the router is at 192.168.1.1 and the computer did not get an address by itself, set it by hand. Address 192.168.1.2, mask 255.255.255.0, gateway left empty. Just do not give the computer the same address as the router, then nothing works. On a Mac with automatic addressing the system may send all traffic to the router, which has no internet yet.
+If the computer did not get an address by itself, set it by hand. Address 10.10.10.2, mask 255.255.255.0, gateway left empty. Just do not give the computer the same address as the router, then nothing works.
 
 If the router does not answer over the cable, try another LAN port or connect over Wi-Fi.
 

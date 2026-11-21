@@ -31,7 +31,7 @@ be7000-5g-split mode single
 
 Settings from stock
 
-On the first boot after installing from stock the firmware takes the Wi-Fi names and passwords, the internet connection and the router address from there. The connection can be PPPoE, DHCP or a static address. Status, Overview shows what was taken, with an undo button.
+On the first boot after installing from stock the firmware takes the Wi-Fi names and passwords and the internet connection from there. The LAN address stays at this build's default, 10.10.10.1. The connection can be PPPoE, DHCP or a static address. Status, Overview shows what was taken, with an undo button.
 
 The factory firmware keeps its settings encrypted. The firmware opens them read-only and from a copy, so everything is in place if you go back to stock. To see what stock has without changing anything, run be7000-stock-import preview.
 
