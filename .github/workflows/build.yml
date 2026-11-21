@@ -125,7 +125,8 @@ jobs:
         run: |
           cd owrt
           cp ../repo/patches/*.patch target/linux/qualcommbe/patches-6.18/
-          # ath12k lives in the mac80211 package, not in the kernel tree
+          # ath11k and ath12k live in the mac80211 package, not in the kernel tree
+          cp ../repo/patches/mac80211-ath11k/*.patch package/kernel/mac80211/patches/ath11k/
           cp ../repo/patches/mac80211-ath12k/*.patch package/kernel/mac80211/patches/ath12k/
           cp ../repo/patches/mac80211-subsys/*.patch package/kernel/mac80211/patches/subsys/
           for p in ../repo/patches/tree/*.patch; do
@@ -142,6 +143,30 @@ jobs:
           cp -a ../repo/miwrt-feed .
           # the LuCI theme lives in this repo, not in any feed
           cp -a ../repo/luci-theme-miwrt package/
+          # A fork signs with its own APK_SIGNING_KEY and publishes its own feed
+          # and releases, so its image has to look for them in the fork: the
+          # feed on the fork's GitHub Pages, updates in the fork's releases.
+          # Left alone, the image would trust only the fork's key but fetch
+          # packages signed with the upstream one, and the updater would offer
+          # upstream images. The app's push relay and app id stay as they are.
+          if [ "${{ github.repository }}" != "iroham/MiWRT" ]; then
+            repo="${{ github.repository }}"
+            owner="${repo%%/*}"; name="${repo#*/}"
+            pages="$(printf '%s' "$owner" | tr 'A-Z' 'a-z').github.io/$name"
+            for f in files/etc/apk/repositories.d/customfeeds.list \
+                     files/etc/init.d/be7000-romsync \
+                     files/www/luci-static/resources/view/status/include/05_be7000.js \
+                     awg-feed/luci-app-be7000-update/root/usr/sbin/miwrt-update; do
+              grep -q 'iroham' "$f" || { echo "::error::$f does not name iroham/MiWRT any more, check the fork rewrite"; exit 1; }
+              sed -i -e "s|iroham\.github\.io/MiWRT|$pages|g" \
+                     -e "s|github\.com/iroham/MiWRT|github.com/$repo|g" \
+                     -e "s|\"iroham/MiWRT\"|\"$repo\"|g" "$f"
+              if grep -n 'iroham\.github\.io/MiWRT\|github\.com/iroham/MiWRT\|"iroham/MiWRT"' "$f"; then
+                echo "::error::$f still points at upstream"; exit 1
+              fi
+            done
+            echo "image points at $repo (feed: https://$pages/feed/)"
+          fi
 
       - name: Signing key
         env:
@@ -407,7 +432,7 @@ jobs:
           git clone --branch gh-pages --single-branch \
             "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" pages
           cd pages
-          for d in awg awgproto base byedpi luci miwrt netshift packages zapret zapret2; do
+          for d in awg awgproto base byedpi luci miwrt netshift packages roamd zapret zapret2; do
             [ -d "../owrt/bin/packages/$ARCH/$d" ] || continue
             mkdir -p "feed/$FEED_BASE/$ARCH/$d"
             rsync -a --delete "../owrt/bin/packages/$ARCH/$d/" "feed/$FEED_BASE/$ARCH/$d/"

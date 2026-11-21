@@ -64,6 +64,9 @@ env:
 jobs:
   image:
     runs-on: ubuntu-24.04
+    # the AC2100 image is built in the upstream repository only: a fork built
+    # for the BE7000 would otherwise add an AC2100 image to its releases
+    if: github.repository == 'iroham/MiWRT' || github.event_name == 'workflow_dispatch'
     # the release step writes to the GitHub release (and creates it and its tag
     # when they do not exist), the mirror step pushes to gh-pages: both need
     # write access to contents with the job token

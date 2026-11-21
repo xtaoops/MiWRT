@@ -331,6 +331,8 @@ MiWRT is made from the work of others:
 - **Linux** and its ath12k Wi-Fi driver; **Xiaomi**, whose board data files ship in the image as the stock firmware carries them.
 - **[Slava Shchipunov](https://github.com/Slava-Shchipunov/awg-openwrt)**: the AmneziaWG packages for OpenWrt that `awg-feed` and `awg-proto-feed` are built on (awg, the network script and the LuCI protocol page).
 - Third-party packages in the feed, built from their authors' recipes and pinned in `feeds-extra.conf`: AmneziaWG, zapret, zapret2, ByeDPI and NetShift.
+- **Nikolai Semendiaev** and **Mark Ruvald Pedersen**, through the [Quarx2k BE7000 build](https://github.com/Quarx2k/OpenWRT-BE7000): the ath11k and ath12k interrupt, receive-memory and per-radio regulatory fixes (`patches/mac80211-ath11k/970`, `971`, `patches/mac80211-ath12k/316` to `318`); **Jeff Johnson** (Qualcomm): the ath12k capability parsing fix (`319`); **Timofey Maykov** (Beam WRT): EEE off by default on the QCA8084 ports (`patches/0910`).
+- **[roamd](https://github.com/Ground-Zerro/roamd)** (Ground-Zerro, Apache-2.0): Wi-Fi roaming and band steering in the feed, with Timofey Maykov's Beam WRT patches in `patches/feeds/roamd`, the first of which keeps it away from MLO networks.
 - **[Project X](https://github.com/XTLS/Xray-core)**: Xray-core, which `miwrt-xray` builds from its release source; the recipe follows OpenWrt's `xray-core` package by Tianling Shen.
 - **[Tailscale](https://github.com/tailscale/tailscale)** (BSD-3-Clause): the Tailscale client, which `miwrt-tailscale` builds from its release source with fewer features; the recipe follows OpenWrt's `tailscale` package.
 - The people who tested BE7000 boards and reported bugs, listed on System, Credits in the web interface.

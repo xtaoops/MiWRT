@@ -89,6 +89,22 @@
 					"zh": "软件源中的第三方软件包，按其作者的 OpenWrt 构建配方编译（remittor、1andrevich、DPITrickster、yandexru45）。"
 				},
 				{
+					"name": "Nikolai Semendiaev, Mark Ruvald Pedersen",
+					"site": "OpenWRT-BE7000",
+					"url": "https://github.com/Quarx2k/OpenWRT-BE7000",
+					"ru": "Исправления ath11k и ath12k из сборки Quarx2k: идемпотентное управление прерываниями, отдельные кеши страниц для колец приёма (утечка памяти) и диапазоны частот по каждому радио при разделении 5 ГГц.",
+					"en": "The ath11k and ath12k fixes from the Quarx2k build: idempotent interrupt control, private page caches for the receive rings (a memory leak) and per-radio frequency ranges when 5 GHz is split.",
+					"zh": "来自 Quarx2k 固件的 ath11k 和 ath12k 修复：可重复调用的中断开关、接收环形缓冲区独立的页缓存（修复内存泄漏），以及 5 GHz 拆分时每个射频各自的频率范围。"
+				},
+				{
+					"name": "roamd",
+					"site": "GitHub",
+					"url": "https://github.com/Ground-Zerro/roamd",
+					"ru": "Роуминг Wi-Fi и выбор диапазона (802.11k/v/r) в фиде пакетов (Ground-Zerro), с патчами Beam WRT, которые не трогают сети MLO.",
+					"en": "Wi-Fi roaming and band steering (802.11k/v/r) in the package feed (Ground-Zerro), with the Beam WRT patches that leave MLO networks alone.",
+					"zh": "软件源中的 Wi-Fi 漫游与频段引导（802.11k/v/r，作者 Ground-Zerro），附带 Beam WRT 的补丁，不改动 MLO 网络。"
+				},
+				{
 					"name": "Project X",
 					"site": "Xray-core",
 					"url": "https://github.com/XTLS/Xray-core",

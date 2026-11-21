@@ -1,0 +1,33 @@
+From: Timofey Maykov <itnitro@gmail.com>
+Subject: [PATCH] roamd: no self-update check on BE7000 firmware
+
+On MiWRT and Beam WRT roamd is built in the firmware feed for
+aarch64_cortex-a73 and updated with the other packages. The upstream feed
+has no build for that CPU type, so the check would only ever report an
+unreachable index.
+
+Adapted for MiWRT from the Beam WRT patch: also recognise
+/etc/miwrt-release.
+---
+diff --git a/package/roamd/src/mesh_update.c b/package/roamd/src/mesh_update.c
+--- a/package/roamd/src/mesh_update.c
++++ b/package/roamd/src/mesh_update.c
+@@ -257,6 +257,18 @@ void mesh_self_check(void)
+ 	if (!job)
+ 		return;
+ 
++	/* On BE7000 firmware (MiWRT, Beam WRT) roamd comes from the
++	 * firmware's own signed feed, built for its CPU type, and is updated
++	 * with the other packages. The upstream feed has no build for it, so
++	 * report the installed version as current. */
++	if (!access("/etc/miwrt-release", F_OK) ||
++	    !access("/etc/be7000-release", F_OK)) {
++		selfcheck_write(job, true);
++		free(job);
++
++		return;
++	}
++
+ 	if (!mesh_self_release(job->branch, sizeof(job->branch), job->arch, sizeof(job->arch))) {
+ 		selfcheck_write(job, false);
+ 		free(job);
