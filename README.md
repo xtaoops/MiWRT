@@ -289,6 +289,8 @@ Base: `https://<router>/cgi-bin/miwrt`. `GET /health`, `POST /pair/start` and `P
 
 ## Installing, updating, going back
 
+[BE7000 中文刷机与恢复手册](docs/be7000-deployment-zh.md)
+
 The procedures come with every release archive:
 
 - [Install from stock](docs/instruction/1-install-en.txt) (needs root SSH on the stock firmware)

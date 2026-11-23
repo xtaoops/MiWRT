@@ -32,8 +32,8 @@ miwrt-update apply
 
 从发布页下载 openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin，然后用下面的命令升级路由器。如果你的路由器地址不同，换成你自己的地址。
 
-scp -O openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "sysupgrade -v /tmp/openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
+scp -O openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin root@10.10.10.1:/tmp/
+ssh root@10.10.10.1 "sysupgrade -v /tmp/openwrt-qualcommbe-ipq95xx-xiaomi_be7000-squashfs-sysupgrade.bin"
 
 升级会写入路由器当前启动的槽位。另一个槽位里的原厂固件不受影响。设置、软件包和已启用的服务都会自动保留下来。
 

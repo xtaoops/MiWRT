@@ -7,8 +7,8 @@ The easiest way is the System, Slots page. On the other slot press "See what is 
 
 You can also use the script. Copy rollback-to-stock.sh to the router, run it and reboot the router.
 
-scp -O rollback-to-stock.sh root@192.168.1.1:/tmp/
-ssh root@192.168.1.1 "sh /tmp/rollback-to-stock.sh && reboot"
+scp -O rollback-to-stock.sh root@10.10.10.1:/tmp/
+ssh root@10.10.10.1 "sh /tmp/rollback-to-stock.sh && reboot"
 
 Neither the page nor the script flashes anything. They only switch the boot to the other slot, where the factory firmware is. MiWRT stays in its slot and the factory firmware boots with its own settings. This works over Wi-Fi too.
 
@@ -43,7 +43,7 @@ Once the firmware has booted successfully, cutting the power does not help, it h
 
 The router booted but does not answer
 
-First check the address. If the settings were taken from the factory firmware during the install, MiWRT usually stays at its address 192.168.31.1. If not, it is at 192.168.1.1. When the computer gets no address by itself, give it one from the same network, 192.168.31.2 or 192.168.1.2, mask 255.255.255.0 and an empty gateway. A common mistake is giving the computer the same address as the router.
+Start with the default management address for this build, 10.10.10.1. A restored configuration can specify a different address. If the computer cannot get a DHCP lease, connect by cable and set it temporarily to 10.10.10.2/24, with no gateway.
 
 If there is no wired network while Wi-Fi works, connect over Wi-Fi, collect the output of the command below and attach it to an issue at https://github.com/iroham/MiWRT/issues. Wi-Fi has the name and password from the factory firmware. If they could not be taken, the network is OpenWrt-BE7000 and its password is the router's serial number from the label on the bottom (SN), typed without the slash. Only if the router could not read its own serial number is the password be7000openwrt.
 
